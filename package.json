@@ -1,5 +1,5 @@
 {
-  "name": "@iamitkapil/devopx-cli",
+  "name": "devopx-cli",
   "version": "1.0.3",
   "description": "A CLI for interacting with the Devopx API",
   "main": "index.js",
