@@ -1,10 +1,10 @@
 {
   "name": "@iamitkapil/devopx-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI for interacting with the Devopx API",
   "main": "index.js",
   "bin": {
-    "devopx": "./index.js"
+    "call-devopx": "./index.js"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
