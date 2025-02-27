@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 
-const API_URL = "https://3.86.211.23:3000"; // Replace with actual API endpoint
+const API_URL = "http://3.86.211.23:3000"; // Replace with actual API endpoint
 
 async function callAPI() {
     try {
