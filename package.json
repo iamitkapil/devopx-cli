@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "name": "@iamitkapil/devopx-cli",
-  "version": "1.0.6",
-=======
   "name": "devopx-cli",
-  "version": "1.0.5",
->>>>>>> 8e65bffbdfc73df1437bd5c2b079be098f731af6
+  "version": "1.0.6",
   "description": "A CLI for interacting with the Devopx API",
   "main": "index.js",
   "bin": {
