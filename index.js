@@ -2,8 +2,16 @@
 
 const axios = require("axios");
 
-const API_URL = "https://3.86.211.23:3000"; // Replace with actual API URL
-const args = process.argv.slice(2);
+const API_URL = "http://3.86.147.92:3000"; // Replace with actual API endpoint
+
+async function sayHello() {
+  try {
+    const response = await axios.get(`${API_URL}/Hello`);
+    console.log("Server Response:", response.data);
+  } catch (error) {
+    console.error("Error calling Hello API:", error.message);
+  }
+}
 
 async function publishArtifact() {
   if (args.length < 3) {
@@ -26,9 +34,11 @@ async function publishArtifact() {
   }
 }
 
-// Check CLI Command
+// Command Handling
 if (args[0] === "publish") {
   publishArtifact();
+} else if (args[0] === "hello") {
+  sayHello();
 } else {
-  console.error("Invalid command. Use: devopx publish <artifact_name> <artifact_type> <artifact_version>");
+  console.error("Invalid command. Use: \n - devopx publish <artifact_name> <artifact_type> <artifact_version>\n - devopx hello");
 }
