@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 
-const API_URL = "http://3.86.147.92:3000"; // Replace with actual API endpoint
+const API_URL = "http://52.90.113.175:3000"; // Replace with actual API endpoint
 
 const args = process.argv.slice(2); // Now args is defined
 
