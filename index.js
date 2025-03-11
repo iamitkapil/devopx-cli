@@ -21,13 +21,14 @@ async function publishArtifact(args) {  // Pass args as a function parameter
     process.exit(1);
   }
 
-  const [artifact_name, artifact_type, artifact_version] = args;
+  const [artifact_name, artifact_type, artifact_version, artifact_url] = args;
 
   try {
     const response = await axios.post(`${API_URL}/publish`, {
       artifact_name,
       artifact_type,
-      artifact_version
+      artifact_version,
+      artifact_url
     });
 
     console.log("Artifact Published:", response.data);
