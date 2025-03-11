@@ -17,7 +17,7 @@ async function sayHello() {
 
 async function publishArtifact(args) {  // Pass args as a function parameter
   if (args.length < 3) {
-    console.error("Usage: devopx publish <artifact_name> <artifact_type> <artifact_version>");
+    console.error("Usage: devopx publish <artifact_name> <artifact_type> <artifact_version> <artifact_url>");
     process.exit(1);
   }
 
