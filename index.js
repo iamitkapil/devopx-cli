@@ -50,7 +50,7 @@ async function uploadToArtifactory(local_path, file_name, artifactory_path, arti
     console.log("DEBUG: file_name =", file_name);
     console.log("DEBUG: artifactTargetPath =", artifactTargetPath);
     console.log(`Uploading ${file_name} to Artifactory at ${artifactTargetPath}...`);
-    console.log("Uploading ${file_name} to Artifactory at ${artifactTargetPath}...");
+    console.log(`Uploading ${file_name} to Artifactory at ${artifactTargetPath}...`);
     await axios.put(artifactTargetPath, fileStream, {
       headers: {
         "Content-Type": "application/octet-stream",
@@ -85,8 +85,8 @@ async function publishArtifact() {
   try {
     const artifact_url = await uploadToArtifactory(local_path, file_name, artifactory_path, artifactory_token);
     const artifact_repo_name = getRepositoryPath();
-    console.log("Repository Path:", repoPath);
-    console.log("📡 Updating artifact details in database...");
+    console.log("Repository Path:", artifact_repo_name);
+    console.log("Calling Devopx: ", artifact_url);
     await axios.post(`${API_URL}/publish`, {
       artifact_name,
       artifact_type,
@@ -96,7 +96,13 @@ async function publishArtifact() {
       initial_environment
     });
 
-    console.log("Database updated successfully!");
+    console.log('Publishing ${artifact_name} successful!');
+    // Print the artifact_id if available
+    if (response.data && response.data.artifact_id) {
+      console.log("Artifact ID:", response.data.artifact_id);
+    } else {
+      console.log("Artifact published, but no artifact_id returned.");
+    }
   } catch (error) {
     console.error("Error Publishing Artifact:", error.message);
     process.exit(1);
