@@ -1,0 +1,31 @@
+# name: Publish Artifact to AWS CodeArtifact
+
+# on:
+#   push:
+#     tags:
+#       - '*'
+
+# jobs:
+#   publish:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       id-token: write
+#       contents: read
+    
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
+
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           role-to-assume: arn:aws:iam::123456789012:role/GHActions-OIDCDeploy-Role
+#           aws-region: us-east-1
+
+#       - name: Login to AWS CodeArtifact
+#         run: |
+#           CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain my-domain --domain-owner 123456789012 --query authorizationToken --output text)
+#           npm config set //my-domain-123456789012.d.codeartifact.us-east-1.amazonaws.com/npm/my-repo/:_authToken=$CODEARTIFACT_AUTH_TOKEN
+
+#       - name: Publish Artifact to CodeArtifact
+#         run: npm publish
