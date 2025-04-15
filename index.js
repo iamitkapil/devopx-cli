@@ -5,8 +5,8 @@ const path = require("path");
 const minimist = require("minimist");
 const { execSync } = require("child_process");
 
-const API_URL = "http://54.82.249.2:3000"; // Replace with actual API endpoint
-const ARTIFACTORY_BASE_URL = "http://3.84.194.232:8081/artifactory"; // Artifactory base URL
+const API_URL = "http://34.207.164.161:3000"; // Replace with actual API endpoint
+const ARTIFACTORY_BASE_URL = "http://52.87.205.218:8081/artifactory"; // Artifactory base URL
 
 // Parse command-line arguments
 const argv = minimist(process.argv.slice(2), {
@@ -26,8 +26,17 @@ async function sayHello() {
 
 function getRepositoryPath() {
   try {
-    const repoPath = execSync("git rev-parse --show-toplevel").toString().trim();
-    return repoPath;
+    const remoteUrl = execSync("git config --get remote.origin.url").toString().trim();
+
+    // Matches both HTTPS and SSH GitHub URLs
+    const match = remoteUrl.match(/github\.com[/:](.+\/.+?)(\.git)?$/);
+    if (match && match[1]) {
+      return `/${match[1]}`;
+    } else {
+      console.error("Could not extract GitHub repo path from remote URL");
+      return null;
+    }
+
   } catch (error) {
     console.error("Error fetching repository path:", error.message);
     return null;
@@ -49,7 +58,6 @@ async function uploadToArtifactory(local_path, file_name, artifactory_path, arti
   try {
     console.log("DEBUG: file_name =", file_name);
     console.log("DEBUG: artifactTargetPath =", artifactTargetPath);
-    console.log(`Uploading ${file_name} to Artifactory at ${artifactTargetPath}...`);
     console.log(`Uploading ${file_name} to Artifactory at ${artifactTargetPath}...`);
     await axios.put(artifactTargetPath, fileStream, {
       headers: {
@@ -87,7 +95,7 @@ async function publishArtifact() {
     const artifact_repo_name = getRepositoryPath();
     console.log("Repository Path:", artifact_repo_name);
     console.log("Calling Devopx: ", artifact_url);
-    await axios.post(`${API_URL}/publish`, {
+    const response = await axios.post(`${API_URL}/publish`, {
       artifact_name,
       artifact_type,
       artifact_version,
@@ -96,10 +104,12 @@ async function publishArtifact() {
       initial_environment
     });
 
-    console.log('Publishing ${artifact_name} successful!');
+    console.log(`Publishing ${artifact_name} successful!`);
+     
+
     // Print the artifact_id if available
-    if (response.data && response.data.artifact_id) {
-      console.log("Artifact ID:", response.data.artifact_id);
+    if (response.data && response.data.data && response.data.data.artifact_id) {
+      console.log("Artifact ID:", response.data.data.artifact_id);
     } else {
       console.log("Artifact published, but no artifact_id returned.");
     }
