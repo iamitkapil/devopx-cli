@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_URL } from '../config';
 
-const API_URL = "http://34.207.164.161:3000"; // Replace with your actual API URL
+
 
 export async function sayHello(): Promise<void> {
   try {

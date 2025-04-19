@@ -10,11 +10,11 @@ import minimist from 'minimist';
 const argv = minimist(process.argv.slice(2));
 
 // Check if the command is valid
-if (argv._[0] === 'sayHello') {
+if (argv._[0] === 'Hello') {
   sayHello();
-} else if (argv._[0] === 'publishArtifact') {
+} else if (argv._[0] === 'publish-artifact') {
   publishArtifact(argv as Partial<PublishArgs>);
-} else if (argv._[0] === 'registerEnvironment') {
+} else if (argv._[0] === 'register-environment') {
   registerEnvironment(argv as Partial<RegisterEnvironmentArgs>);
 } else {
   console.error('Unknown command. Please use: sayHello, publishArtifact, registerEnvironment');
