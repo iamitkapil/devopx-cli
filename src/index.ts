@@ -17,6 +17,6 @@ if (argv._[0] === 'Hello') {
 } else if (argv._[0] === 'register-environment') {
   registerEnvironment(argv as Partial<RegisterEnvironmentArgs>);
 } else {
-  console.error('Unknown command. Please use: sayHello, publishArtifact, registerEnvironment');
+  console.error('Unknown command. Please use: Hello, publish-artifact, register-environment');
   process.exit(1);
 }

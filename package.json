@@ -1,6 +1,6 @@
 {
   "name": "devopx-cli",
-  "version": "1.3.7",
+  "version": "1.3.9",
   "description": "A CLI for interacting with the Devopx API",
   "main": "dist/index.js",
   "bin": {
