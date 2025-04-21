@@ -1,22 +1,26 @@
 #!/usr/bin/env node
 
-import { sayHello } from './commands/sayHello';
+import { hello } from './commands/hello';
 import { publishArtifact } from './commands/publishArtifact';
 import { registerEnvironment } from './commands/registerEnvironment';
 import type { PublishArgs } from './commands/publishArtifact';
-import type { RegisterEnvironmentArgs } from './commands/registerEnvironment';
+
 import minimist from 'minimist';
+import { getVersion } from './commands/version'; // Update this import
 
 const argv = minimist(process.argv.slice(2));
 
 // Check if the command is valid
-if (argv._[0] === 'Hello') {
-  sayHello();
+if (argv._[0] === 'hello') {
+  hello();
 } else if (argv._[0] === 'publish-artifact') {
   publishArtifact(argv as Partial<PublishArgs>);
 } else if (argv._[0] === 'register-environment') {
-  registerEnvironment(argv as Partial<RegisterEnvironmentArgs>);
+  registerEnvironment();
+} else if (argv._[0] === '--version' || argv.version) { // Handle version check
+  console.log(`devopx-cli version ${getVersion()}`); // Use getVersion function
+  process.exit(0);
 } else {
-  console.error('Unknown command. Please use: Hello, publish-artifact, register-environment');
+  console.error('Unknown command. Please use: hello, publish-artifact, register-environment');
   process.exit(1);
 }

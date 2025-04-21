@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 
 
 
-export async function sayHello(): Promise<void> {
+export async function hello(): Promise<void> {
   try {
     const response = await axios.get(`${API_URL}/Hello`);
     console.log("Server Response:", response.data);
