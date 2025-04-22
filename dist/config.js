@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ARTIFACTORY_BASE_URL = exports.API_URL = void 0;
-exports.API_URL = "http://3.85.114.45:3000";
+exports.API_URL = "http://3.88.9.91:3000";
 exports.ARTIFACTORY_BASE_URL = "http://52.87.205.218:8081/artifactory"; // Artifactory base URL

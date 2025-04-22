@@ -27,7 +27,7 @@ async function registerEnvironment() {
             is_prod,
             trigger_on_update,
             required_validations,
-            required_environment: required_environments
+            required_environments
         };
         try {
             const response = await axios_1.default.post(`${config_1.API_URL}/register-environment`, payload);

@@ -34,7 +34,7 @@ export async function registerEnvironment(): Promise<void> {
       is_prod,
       trigger_on_update,
       required_validations,
-      required_environment: required_environments
+      required_environments
     };
 
     try {
