@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+//import fetch from 'node-fetch';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.promoteArtifacts = void 0;
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const API_URL = process.env.API_URL || '';
 async function promoteArtifacts(args) {
     const fromEnv = args['from-env'];
@@ -15,7 +12,7 @@ async function promoteArtifacts(args) {
     }
     try {
         console.log(`Requesting promote from ${fromEnv} to ${toEnv}...`);
-        const res = await (0, node_fetch_1.default)(`${API_URL}/promoteArtifacts`, {
+        const res = await fetch(`${API_URL}/promoteArtifacts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

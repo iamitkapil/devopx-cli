@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import axios from "axios";
 import { uploadToArtifactory } from "../utils/uploadToArtifactory";
@@ -54,7 +53,7 @@ export async function publishArtifact(argv: Partial<PublishArgs>) {
       initial_environment:initial_environment
     };
 
-    console.log("🔍 Payload being sent to Devopx API:", JSON.stringify(apiPayload, null, 2));
+    console.log(" Payload being sent to Devopx API:", JSON.stringify(apiPayload, null, 2));
     console.log("Notifying Devopx API...");
     
     const response = await axios.post(`${API_URL}/publish`, apiPayload);

@@ -31,7 +31,7 @@ async function publishArtifact(argv) {
             artifact_repo_name: artifact_repo_name,
             initial_environment: initial_environment
         };
-        console.log("🔍 Payload being sent to Devopx API:", JSON.stringify(apiPayload, null, 2));
+        console.log(" Payload being sent to Devopx API:", JSON.stringify(apiPayload, null, 2));
         console.log("Notifying Devopx API...");
         const response = await axios_1.default.post(`${config_1.API_URL}/publish`, apiPayload);
         console.log(`Publishing ${artifact_name} successful!`);

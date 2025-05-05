@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { getRepositoryPath } from "../utils/getRepositoryPath";
 
 export async function registerEnvironment(): Promise<void> {
   const filePath = path.resolve('devopx-env.json');
@@ -12,6 +13,7 @@ export async function registerEnvironment(): Promise<void> {
 
   const rawData = fs.readFileSync(filePath, 'utf-8');
   const envData = JSON.parse(rawData);
+  const repoPath = getRepositoryPath();
 
   for (const env_id of Object.keys(envData)) {
     const envConfig = envData[env_id];
@@ -27,7 +29,7 @@ export async function registerEnvironment(): Promise<void> {
     } = envConfig;
 
     const payload = {
-      env_id,
+      envid: `${repoPath}:${env_id}`,
       branch,
       manifest_path,
       is_dev,
@@ -38,6 +40,8 @@ export async function registerEnvironment(): Promise<void> {
     };
 
     try {
+      console.log('Sending payload for:', `${repoPath}:${env_id}`);
+      console.log(JSON.stringify(payload, null, 2));
       const response = await axios.post(`${API_URL}/register-environment`, payload);
       console.log(`Environment '${env_id}' registered successfully!`);
       console.log('Response:', response.data);
